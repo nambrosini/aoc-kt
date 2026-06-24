@@ -3,7 +3,6 @@ package aoc__YEAR__
 import org.junit.jupiter.api.Assumptions.assumeTrue
 import util.exampleExists
 import util.readExample
-import org.junit.Assume.assumeTrue
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

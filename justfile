@@ -39,6 +39,9 @@ new year day:
     just download {{year}} {{day}}
     just puzzle {{year}} {{day}}
 
+test year day:
+    ./gradlew test --tests "aoc{{year}}.Day$(printf '%02d' {{day}})Test"
+
 lint:
     ./gradlew ktlintCheck
 

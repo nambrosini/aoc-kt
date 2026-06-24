@@ -1,7 +1,6 @@
 package aoc2019
 
 import util.readInput
-import util.intcode.Computer
 
 object Day02 {
     fun part1(input: List<String>): Int {
@@ -29,6 +28,57 @@ object Day02 {
         return -1
     }
 }
+
+class Computer(val memory: MutableList<Int>) {
+    var pointer: Int = 0
+
+    fun run(a: Int, b: Int) {
+        memory[1] = a
+        memory[2] = b
+
+        while (true) {
+            val opcode = memory[pointer].toOpcode()
+            when (opcode) {
+                OpCode.Add -> {
+                    val v1 = getMem(1)
+                    val v2 = getMem(2)
+
+                    setMem(3, v1 + v2)
+                    pointer += 4
+                }
+
+                OpCode.Mult -> {
+                    val v1 = getMem(1)
+                    val v2 = getMem(2)
+
+                    setMem(3, v1 * v2)
+                    pointer += 4
+                }
+
+                OpCode.Exit -> {
+                    return
+                }
+            }
+        }
+    }
+
+    fun setMem(offset: Int, value: Int) {
+        memory[memory[pointer + offset]] = value
+    }
+
+    fun getMem(offset: Int): Int {
+        return memory[memory[pointer + offset]]
+    }
+}
+
+enum class OpCode(val code: Int) {
+    Add(1),
+    Mult(2),
+    Exit(99);
+}
+
+fun Int.toOpcode(): OpCode =
+    OpCode.entries.find { it.code == this } ?: throw IllegalArgumentException("No Opcode for value $this")
 
 fun main() {
     val input = readInput(2019, 2)
