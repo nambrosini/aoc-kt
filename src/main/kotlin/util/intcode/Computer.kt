@@ -1,9 +1,13 @@
 package util.intcode
 
-class Computer(val memory: MutableList<Int>) {
+fun parseMemory(input: List<String>): List<Int> = input[0].split(",").map { it.toInt() }
+
+class Computer(
+    val memory: MutableList<Int>,
+) {
     var pointer: Int = 0
 
-    fun run(input: Int?): Int? {
+    fun run(input: MutableList<Int>): Int? {
         while (true) {
             when (val opcode = memory[pointer].toOpcode()) {
                 is OpCode.Add -> {
@@ -23,7 +27,7 @@ class Computer(val memory: MutableList<Int>) {
                 }
 
                 is OpCode.Save -> {
-                    setMem(1, opcode.m1, input!!)
+                    setMem(1, opcode.m1, input.removeFirst())
 
                     pointer += 2
                 }
@@ -80,17 +84,14 @@ class Computer(val memory: MutableList<Int>) {
     fun getMem(
         offset: Int,
         mode: Mode,
-    ): Int {
-        return memory[getIndex(offset, mode)]
-    }
+    ): Int = memory[getIndex(offset, mode)]
 
     fun getIndex(
         offset: Int,
         mode: Mode,
-    ): Int {
-        return when (mode) {
+    ): Int =
+        when (mode) {
             Mode.Imm -> pointer + offset
             Mode.Pos -> memory[pointer + offset]
         }
-    }
 }

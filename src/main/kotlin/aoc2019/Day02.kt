@@ -83,7 +83,13 @@ enum class OpCode(val code: Int) {
     Exit(99),
 }
 
-fun Int.toOpcode(): OpCode = OpCode.entries.find { it.code == this } ?: throw IllegalArgumentException("No Opcode for value $this")
+fun Int.toOpcode(): OpCode =
+    when (this) {
+        1 -> OpCode.Add
+        2 -> OpCode.Mult
+        99 -> OpCode.Exit
+        else -> throw IllegalArgumentException("No Opcode for value $this")
+    }
 
 fun main() {
     val input = readInput(2019, 2)

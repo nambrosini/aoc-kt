@@ -6,14 +6,14 @@ import util.readInput
 
 object Day03 {
     fun part1(input: List<String>): Int {
-        var wires = mutableListOf<MutableSet<Pos>>()
+        val wires = mutableListOf<MutableSet<Pos>>()
         for (instructions in input) {
             var pos = Pos(0, 0)
-            var wire = mutableSetOf<Pos>()
+            val wire = mutableSetOf<Pos>()
             for (instruction in instructions.split(",")) {
                 val dir = instruction[0].toDir()
-                var steps = instruction.substring(1..<instruction.length).toInt()
-                for (step in 0..<steps) {
+                val steps = instruction.drop(1).toInt()
+                repeat(steps) {
                     pos += dir
                     wire.add(pos)
                 }
@@ -26,15 +26,15 @@ object Day03 {
     }
 
     fun part2(input: List<String>): Int {
-        var wires = mutableListOf<MutableSet<Pair<Pos, Int>>>()
+        val wires = mutableListOf<MutableSet<Pair<Pos, Int>>>()
         for (instructions in input) {
             var pos = Pos(0, 0)
             var totalSteps = 0
-            var wire = mutableSetOf<Pair<Pos, Int>>()
+            val wire = mutableSetOf<Pair<Pos, Int>>()
             for (instruction in instructions.split(",")) {
                 val dir = instruction[0].toDir()
-                var steps = instruction.substring(1..<instruction.length).toInt()
-                for (step in 0..<steps) {
+                val steps = instruction.drop(1).toInt()
+                repeat(steps) {
                     totalSteps += 1
                     pos += dir
                     wire.add(Pair(pos, totalSteps))

@@ -3,31 +3,14 @@ package aoc2019
 import util.readInput
 
 object Day04 {
-    fun part1(input: List<String>): Int {
-        var passwords = 0
-        var start = input[0].substringBefore("-").toInt()
-        var end = input[0].substringAfter("-").toInt()
-
-        for (p in start..end) {
-            if (isValid(p)) {
-                passwords++
-            }
-        }
-        return passwords
+    private fun count(input: List<String>, pred: (Int) -> Boolean): Int {
+        val (start, end) = input[0].split("-").map { it.toInt() }
+        return (start..end).count(pred)
     }
 
-    fun part2(input: List<String>): Int {
-        var passwords = 0
-        var start = input[0].substringBefore("-").toInt()
-        var end = input[0].substringAfter("-").toInt()
+    fun part1(input: List<String>): Int = count(input, ::isValid)
 
-        for (p in start..end) {
-            if (isValidPart2(p)) {
-                passwords++
-            }
-        }
-        return passwords
-    }
+    fun part2(input: List<String>): Int = count(input, ::isValidPart2)
 
     fun isValid(num: Int): Boolean {
         var x = num

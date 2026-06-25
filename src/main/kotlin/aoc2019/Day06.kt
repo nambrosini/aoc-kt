@@ -1,14 +1,13 @@
 package aoc2019
 
 import util.readInput
-import kotlin.collections.HashMap
 
 object Day06 {
     const val START = "YOU"
     const val TARGET = "SAN"
 
-    fun parse(input: List<String>): HashMap<String, MutableSet<String>> {
-        val map = HashMap<String, MutableSet<String>>()
+    fun parse(input: List<String>): MutableMap<String, MutableSet<String>> {
+        val map = mutableMapOf<String, MutableSet<String>>()
 
         for (l in input) {
             val a = l.substringAfter(")")
@@ -29,17 +28,14 @@ object Day06 {
     fun part2(input: List<String>): Int {
         val map = parse(input)
 
-        val visited = mutableSetOf<String>()
-
-        val res = recurse2(map, visited, START)!!
-        return res
+        return recurse2(map, mutableSetOf(), START)!!
     }
 
     fun recurse(
-        map: HashMap<String, MutableSet<String>>,
+        map: MutableMap<String, MutableSet<String>>,
         current: String,
     ): Int {
-        if (!map.keys.contains(current)) {
+        if (current !in map) {
             return 0
         }
 
@@ -47,7 +43,7 @@ object Day06 {
     }
 
     fun recurse2(
-        map: HashMap<String, MutableSet<String>>,
+        map: MutableMap<String, MutableSet<String>>,
         visited: MutableSet<String>,
         current: String,
     ): Int? {
