@@ -1,7 +1,8 @@
 package aoc2019
 
+import util.loc.Pos
+import util.loc.toDir
 import util.readInput
-import util.loc.*
 
 object Day03 {
     fun part1(input: List<String>): Int {

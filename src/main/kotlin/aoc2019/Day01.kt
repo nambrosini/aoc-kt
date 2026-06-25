@@ -4,13 +4,14 @@ import util.readInput
 
 object Day01 {
     fun part1(input: List<String>): Any {
-        return input.sumOf { it.toInt() / 3 - 2}
+        return input.sumOf { it.toInt() / 3 - 2 }
     }
+
     fun part2(input: List<String>): Int {
         var sum = 0
         for (x in input) {
             var num = x.toInt()
-            
+
             while (num > 6) {
                 num = num / 3 - 2
                 sum += num

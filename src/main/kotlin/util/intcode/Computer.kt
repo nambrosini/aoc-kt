@@ -69,15 +69,25 @@ class Computer(val memory: MutableList<Int>) {
         }
     }
 
-    fun setMem(offset: Int, mode: Mode, value: Int) {
+    fun setMem(
+        offset: Int,
+        mode: Mode,
+        value: Int,
+    ) {
         memory[getIndex(offset, mode)] = value
     }
 
-    fun getMem(offset: Int, mode: Mode): Int {
+    fun getMem(
+        offset: Int,
+        mode: Mode,
+    ): Int {
         return memory[getIndex(offset, mode)]
     }
 
-    fun getIndex(offset: Int, mode: Mode): Int {
+    fun getIndex(
+        offset: Int,
+        mode: Mode,
+    ): Int {
         return when (mode) {
             Mode.Imm -> pointer + offset
             Mode.Pos -> memory[pointer + offset]

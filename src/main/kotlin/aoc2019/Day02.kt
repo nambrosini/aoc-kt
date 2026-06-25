@@ -32,7 +32,10 @@ object Day02 {
 class Computer(val memory: MutableList<Int>) {
     var pointer: Int = 0
 
-    fun run(a: Int, b: Int) {
+    fun run(
+        a: Int,
+        b: Int,
+    ) {
         memory[1] = a
         memory[2] = b
 
@@ -62,7 +65,10 @@ class Computer(val memory: MutableList<Int>) {
         }
     }
 
-    fun setMem(offset: Int, value: Int) {
+    fun setMem(
+        offset: Int,
+        value: Int,
+    ) {
         memory[memory[pointer + offset]] = value
     }
 
@@ -74,11 +80,10 @@ class Computer(val memory: MutableList<Int>) {
 enum class OpCode(val code: Int) {
     Add(1),
     Mult(2),
-    Exit(99);
+    Exit(99),
 }
 
-fun Int.toOpcode(): OpCode =
-    OpCode.entries.find { it.code == this } ?: throw IllegalArgumentException("No Opcode for value $this")
+fun Int.toOpcode(): OpCode = OpCode.entries.find { it.code == this } ?: throw IllegalArgumentException("No Opcode for value $this")
 
 fun main() {
     val input = readInput(2019, 2)

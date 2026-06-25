@@ -1,7 +1,11 @@
 package util.loc
 
 enum class Dir {
-    U, R, D, L;
+    U,
+    R,
+    D,
+    L,
+    ;
 
     fun toPos(): Pos {
         return when (this) {
@@ -13,10 +17,11 @@ enum class Dir {
     }
 }
 
-fun Char.toDir(): Dir = when (this) {
-    'U' -> Dir.U
-    'R' -> Dir.R
-    'D' -> Dir.D
-    'L' -> Dir.L
-    else -> error("Unexpected value: $this")
-}
+fun Char.toDir(): Dir =
+    when (this) {
+        'U' -> Dir.U
+        'R' -> Dir.R
+        'D' -> Dir.D
+        'L' -> Dir.L
+        else -> error("Unexpected value: $this")
+    }

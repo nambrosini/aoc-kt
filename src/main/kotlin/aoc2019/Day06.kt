@@ -35,7 +35,10 @@ object Day06 {
         return res
     }
 
-    fun recurse(map: HashMap<String, MutableSet<String>>, current: String): Int {
+    fun recurse(
+        map: HashMap<String, MutableSet<String>>,
+        current: String,
+    ): Int {
         if (!map.keys.contains(current)) {
             return 0
         }
@@ -43,23 +46,31 @@ object Day06 {
         return map[current]!!.sumOf { recurse(map, it) } + 1
     }
 
-    fun recurse2(map: HashMap<String, MutableSet<String>>, visited: MutableSet<String>, current: String): Int? {
+    fun recurse2(
+        map: HashMap<String, MutableSet<String>>,
+        visited: MutableSet<String>,
+        current: String,
+    ): Int? {
         if (current == TARGET) {
             return visited.size - 2
         }
 
         visited.add(current)
 
-        val connections = (map.getOrDefault(
-            current,
-            mutableSetOf()
-        ) + map.filter { it.value.contains(current) }.keys).filter { !visited.contains(it) }
+        val connections =
+            (
+                map.getOrDefault(
+                    current,
+                    mutableSetOf(),
+                ) + map.filter { it.value.contains(current) }.keys
+            ).filter { !visited.contains(it) }
 
         if (connections.isEmpty()) {
             return null
         }
 
-        return connections.mapNotNull { recurse2(map, visited.toMutableSet(), it) }
+        return connections
+            .mapNotNull { recurse2(map, visited.toMutableSet(), it) }
             .minOfOrNull { it }
     }
 }

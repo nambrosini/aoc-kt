@@ -1,7 +1,7 @@
 package aoc2019
 
-import util.readInput
 import util.intcode.Computer
+import util.readInput
 
 object Day05 {
     fun part1(input: List<String>): Int {
