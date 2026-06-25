@@ -1,13 +1,19 @@
 package util.intcode
 
-fun parseMemory(input: String): List<Int> = input.split(",").map { it.toInt() }
+fun parseMemory(input: String): LongArray =
+    input
+        .trim()
+        .split(",")
+        .map { it.toLong() }
+        .toLongArray()
 
 class Computer(
-    val memory: MutableList<Int>,
+    var memory: LongArray,
 ) {
     var pointer: Int = 0
+    var relativeBase: Int = 0
 
-    fun run(input: MutableList<Int>): Int? {
+    fun run(input: MutableList<Long>): Long? {
         while (true) {
             when (val opcode = memory[pointer].toOpcode()) {
                 is OpCode.Add -> {
@@ -41,13 +47,13 @@ class Computer(
                 is OpCode.Jit -> {
                     val v1 = getMem(1, opcode.m1)
 
-                    pointer = if (v1 != 0) getMem(2, opcode.m2) else pointer + 3
+                    pointer = if (v1 != 0L) getMem(2, opcode.m2).toInt() else pointer + 3
                 }
 
                 is OpCode.Jif -> {
                     val v1 = getMem(1, opcode.m1)
 
-                    pointer = if (v1 == 0) getMem(2, opcode.m2) else pointer + 3
+                    pointer = if (v1 == 0L) getMem(2, opcode.m2).toInt() else pointer + 3
                 }
 
                 is OpCode.Lt -> {
@@ -66,6 +72,13 @@ class Computer(
                     pointer += 4
                 }
 
+                is OpCode.Arb -> {
+                    val v1 = getMem(1, opcode.m1)
+
+                    relativeBase += v1.toInt()
+                    pointer += 2
+                }
+
                 OpCode.Exit -> {
                     return null
                 }
@@ -76,22 +89,32 @@ class Computer(
     fun setMem(
         offset: Int,
         mode: Mode,
-        value: Int,
+        value: Long,
     ) {
-        memory[getIndex(offset, mode)] = value
+        val index = getIndex(offset, mode)
+        memory[index] = value
     }
 
     fun getMem(
         offset: Int,
         mode: Mode,
-    ): Int = memory[getIndex(offset, mode)]
+    ): Long = memory[getIndex(offset, mode)]
 
     fun getIndex(
         offset: Int,
         mode: Mode,
-    ): Int =
-        when (mode) {
-            Mode.Imm -> pointer + offset
-            Mode.Pos -> memory[pointer + offset]
+    ): Int {
+        val index =
+            when (mode) {
+                Mode.Imm -> pointer + offset
+                Mode.Pos -> memory[pointer + offset].toInt()
+                Mode.Rel -> memory[pointer + offset].toInt() + relativeBase
+            }
+
+        if (memory.size <= index) {
+            this.memory = this.memory.copyOf(index + 1)
         }
+
+        return index
+    }
 }

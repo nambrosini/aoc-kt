@@ -5,13 +5,13 @@ import util.readInput
 
 object Day02 {
     fun part1(input: String): Int {
-        val pc = Computer(parseMemory(input).toMutableList())
+        val pc = Computer(input.split(',').map { it.toInt() }.toMutableList())
         pc.run(12, 2)
         return pc.memory[0]
     }
 
     fun part2(input: String): Int {
-        val memory = parseMemory(input)
+        val memory = input.split(',').map { it.toInt() }.toMutableList()
 
         for (a in 0..100) {
             for (b in 0..100) {

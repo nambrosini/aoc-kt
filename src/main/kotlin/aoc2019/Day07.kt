@@ -6,15 +6,15 @@ import util.permutations
 import util.readInput
 
 object Day07 {
-    fun part1(input: String): Int {
+    fun part1(input: String): Long {
         val memory = parseMemory(input)
 
-        var max = 0
+        var max = 0L
 
-        for (phases in (0..4).permutations()) {
-            var previous = 0
+        for (phases in (0L..4L).permutations()) {
+            var previous = 0L
             for (phase in phases) {
-                val pc = Computer(memory.toMutableList())
+                val pc = Computer(memory.copyOf())
                 previous = pc.run(mutableListOf(phase, previous))!!
             }
             max = maxOf(max, previous)
@@ -22,17 +22,17 @@ object Day07 {
         return max
     }
 
-    fun part2(input: String): Int {
+    fun part2(input: String): Long {
         val memory = parseMemory(input)
 
-        var max = 0
+        var max = 0L
 
-        for (phases in (5..9).permutations()) {
+        for (phases in (5L..9L).permutations()) {
             // Init
             val amplifiers = mutableListOf<Computer>()
-            var previous = 0
+            var previous = 0L
             for (phase in phases) {
-                val pc = Computer(memory.toMutableList())
+                val pc = Computer(memory.copyOf())
                 previous = pc.run(mutableListOf(phase, previous)) ?: error("Output expected")
                 amplifiers.add(pc)
             }

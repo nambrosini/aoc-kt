@@ -3,12 +3,14 @@ package util.intcode
 enum class Mode {
     Pos,
     Imm,
+    Rel,
 }
 
-fun Int.toMode(): Mode =
+fun Long.toMode(): Mode =
     when (this) {
-        0 -> Mode.Pos
-        1 -> Mode.Imm
+        0L -> Mode.Pos
+        1L -> Mode.Imm
+        2L -> Mode.Rel
         else -> error("No Mode for value $this")
     }
 
@@ -55,25 +57,30 @@ sealed class OpCode {
         val m3: Mode,
     ) : OpCode()
 
+    data class Arb(
+        val m1: Mode,
+    ) : OpCode()
+
     object Exit : OpCode()
 }
 
-fun Int.toOpcode(): OpCode {
+fun Long.toOpcode(): OpCode {
     val op = this % 100
     val m1 = ((this / 100) % 10).toMode()
     val m2 = ((this / 1000) % 10).toMode()
     val m3 = ((this / 10000) % 10).toMode()
 
     return when (op) {
-        1 -> OpCode.Add(m1, m2, m3)
-        2 -> OpCode.Mult(m1, m2, m3)
-        3 -> OpCode.Save(m1)
-        4 -> OpCode.Out(m1)
-        5 -> OpCode.Jit(m1, m2)
-        6 -> OpCode.Jif(m1, m2)
-        7 -> OpCode.Lt(m1, m2, m3)
-        8 -> OpCode.Eq(m1, m2, m3)
-        99 -> OpCode.Exit
+        1L -> OpCode.Add(m1, m2, m3)
+        2L -> OpCode.Mult(m1, m2, m3)
+        3L -> OpCode.Save(m1)
+        4L -> OpCode.Out(m1)
+        5L -> OpCode.Jit(m1, m2)
+        6L -> OpCode.Jif(m1, m2)
+        7L -> OpCode.Lt(m1, m2, m3)
+        8L -> OpCode.Eq(m1, m2, m3)
+        9L -> OpCode.Arb(m1)
+        99L -> OpCode.Exit
         else -> error("No Opcode for value $this")
     }
 }
