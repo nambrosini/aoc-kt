@@ -3,13 +3,11 @@ package aoc2019
 import util.readInput
 
 object Day01 {
-    fun part1(input: List<String>): Any {
-        return input.sumOf { it.toInt() / 3 - 2 }
-    }
+    fun part1(input: String): Any = input.lines().sumOf { it.toInt() / 3 - 2 }
 
-    fun part2(input: List<String>): Int {
+    fun part2(input: String): Int {
         var sum = 0
-        for (x in input) {
+        for (x in input.lines()) {
             var num = x.toInt()
 
             while (num > 6) {

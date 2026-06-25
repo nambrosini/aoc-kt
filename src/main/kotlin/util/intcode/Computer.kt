@@ -1,6 +1,6 @@
 package util.intcode
 
-fun parseMemory(input: List<String>): List<Int> = input[0].split(",").map { it.toInt() }
+fun parseMemory(input: String): List<Int> = input.split(",").map { it.toInt() }
 
 class Computer(
     val memory: MutableList<Int>,

@@ -7,14 +7,13 @@ enum class Dir {
     L,
     ;
 
-    fun toPos(): Pos {
-        return when (this) {
+    fun toPos(): Pos =
+        when (this) {
             U -> Pos(0, -1)
             R -> Pos(1, 0)
             D -> Pos(0, 1)
             L -> Pos(-1, 0)
         }
-    }
 }
 
 fun Char.toDir(): Dir =

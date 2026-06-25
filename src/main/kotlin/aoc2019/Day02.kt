@@ -1,18 +1,17 @@
 package aoc2019
 
+import util.intcode.parseMemory
 import util.readInput
 
 object Day02 {
-    fun part1(input: List<String>): Int {
-        val memory = input[0].split(',').map { it.toInt() }
-
-        val pc = Computer(memory.toMutableList())
+    fun part1(input: String): Int {
+        val pc = Computer(parseMemory(input).toMutableList())
         pc.run(12, 2)
         return pc.memory[0]
     }
 
-    fun part2(input: List<String>): Int {
-        val memory = input[0].split(',').map { it.toInt() }
+    fun part2(input: String): Int {
+        val memory = parseMemory(input)
 
         for (a in 0..100) {
             for (b in 0..100) {
@@ -29,7 +28,9 @@ object Day02 {
     }
 }
 
-class Computer(val memory: MutableList<Int>) {
+class Computer(
+    val memory: MutableList<Int>,
+) {
     var pointer: Int = 0
 
     fun run(
@@ -72,12 +73,12 @@ class Computer(val memory: MutableList<Int>) {
         memory[memory[pointer + offset]] = value
     }
 
-    fun getMem(offset: Int): Int {
-        return memory[memory[pointer + offset]]
-    }
+    fun getMem(offset: Int): Int = memory[memory[pointer + offset]]
 }
 
-enum class OpCode(val code: Int) {
+enum class OpCode(
+    val code: Int,
+) {
     Add(1),
     Mult(2),
     Exit(99),

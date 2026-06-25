@@ -3,14 +3,17 @@ package aoc2019
 import util.readInput
 
 object Day04 {
-    private fun count(input: List<String>, pred: (Int) -> Boolean): Int {
-        val (start, end) = input[0].split("-").map { it.toInt() }
+    private fun count(
+        input: String,
+        pred: (Int) -> Boolean,
+    ): Int {
+        val (start, end) = input.split("-").map { it.toInt() }
         return (start..end).count(pred)
     }
 
-    fun part1(input: List<String>): Int = count(input, ::isValid)
+    fun part1(input: String): Int = count(input, ::isValid)
 
-    fun part2(input: List<String>): Int = count(input, ::isValidPart2)
+    fun part2(input: String): Int = count(input, ::isValidPart2)
 
     fun isValid(num: Int): Boolean {
         var x = num

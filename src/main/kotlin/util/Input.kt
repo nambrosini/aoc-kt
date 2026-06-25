@@ -5,7 +5,7 @@ import java.io.File
 fun readInput(
     year: Int,
     day: Int,
-): List<String> = File("data/input/$year/$day.txt").readLines()
+): String = File("data/input/$year/$day.txt").readText()
 
 fun exampleExists(
     year: Int,
@@ -21,8 +21,8 @@ fun readExample(
     year: Int,
     day: Int,
     part: Int,
-): List<String> {
+): String {
     val specific = File("data/examples/$year/day${day}_$part.txt")
     val general = File("data/examples/$year/day$day.txt")
-    return (if (specific.exists()) specific else general).readLines()
+    return (if (specific.exists()) specific else general).readText()
 }

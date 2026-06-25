@@ -6,10 +6,10 @@ object Day06 {
     const val START = "YOU"
     const val TARGET = "SAN"
 
-    fun parse(input: List<String>): MutableMap<String, MutableSet<String>> {
+    fun parse(input: String): MutableMap<String, MutableSet<String>> {
         val map = mutableMapOf<String, MutableSet<String>>()
 
-        for (l in input) {
+        for (l in input.lines()) {
             val a = l.substringAfter(")")
             val b = l.substringBefore(")")
 
@@ -19,13 +19,13 @@ object Day06 {
         return map
     }
 
-    fun part1(input: List<String>): Int {
+    fun part1(input: String): Int {
         val map = parse(input)
 
         return map.keys.sumOf { recurse(map, it) }
     }
 
-    fun part2(input: List<String>): Int {
+    fun part2(input: String): Int {
         val map = parse(input)
 
         return recurse2(map, mutableSetOf(), START)!!

@@ -3,11 +3,11 @@ package aoc__YEAR__
 import util.readInput
 
 object Day__DAY__ {
-    fun part1(input: List<String>): Int {
+    fun part1(input: String): Int {
         return 0
     }
 
-    fun part2(input: List<String>): Int {
+    fun part2(input: String): Int {
         return 0
     }
 }

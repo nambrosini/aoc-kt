@@ -5,7 +5,7 @@ import util.intcode.parseMemory
 import util.readInput
 
 object Day05 {
-    fun part1(input: List<String>): Int {
+    fun part1(input: String): Int {
         val pc = Computer(parseMemory(input).toMutableList())
         var result = 0
 
@@ -18,7 +18,7 @@ object Day05 {
         return result
     }
 
-    fun part2(input: List<String>): Int {
+    fun part2(input: String): Int {
         val pc = Computer(parseMemory(input).toMutableList())
         return pc.run(mutableListOf(5))!!
     }

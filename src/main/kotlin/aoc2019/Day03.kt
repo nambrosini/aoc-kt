@@ -5,9 +5,9 @@ import util.loc.toDir
 import util.readInput
 
 object Day03 {
-    fun part1(input: List<String>): Int {
+    fun part1(input: String): Int {
         val wires = mutableListOf<MutableSet<Pos>>()
-        for (instructions in input) {
+        for (instructions in input.lines()) {
             var pos = Pos(0, 0)
             val wire = mutableSetOf<Pos>()
             for (instruction in instructions.split(",")) {
@@ -21,13 +21,14 @@ object Day03 {
             wires.add(wire)
         }
 
-        return wires[0].filter { wires[1].contains(it) }
+        return wires[0]
+            .filter { wires[1].contains(it) }
             .minOf { it.dist(Pos(0, 0)) }
     }
 
-    fun part2(input: List<String>): Int {
+    fun part2(input: String): Int {
         val wires = mutableListOf<MutableSet<Pair<Pos, Int>>>()
-        for (instructions in input) {
+        for (instructions in input.lines()) {
             var pos = Pos(0, 0)
             var totalSteps = 0
             val wire = mutableSetOf<Pair<Pos, Int>>()
@@ -43,7 +44,8 @@ object Day03 {
             wires.add(wire)
         }
 
-        return wires[0].filter { pos -> wires[1].any { it.first == pos.first } }
+        return wires[0]
+            .filter { pos -> wires[1].any { it.first == pos.first } }
             .minOfOrNull { pos -> pos.second + wires[1].find { it.first == pos.first }!!.second }!!
     }
 }

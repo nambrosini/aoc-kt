@@ -13,21 +13,47 @@ fun Int.toMode(): Mode =
     }
 
 sealed class OpCode {
-    data class Add(val m1: Mode, val m2: Mode, val m3: Mode) : OpCode()
+    data class Add(
+        val m1: Mode,
+        val m2: Mode,
+        val m3: Mode,
+    ) : OpCode()
 
-    data class Mult(val m1: Mode, val m2: Mode, val m3: Mode) : OpCode()
+    data class Mult(
+        val m1: Mode,
+        val m2: Mode,
+        val m3: Mode,
+    ) : OpCode()
 
-    data class Save(val m1: Mode) : OpCode()
+    data class Save(
+        val m1: Mode,
+    ) : OpCode()
 
-    data class Out(val m1: Mode) : OpCode()
+    data class Out(
+        val m1: Mode,
+    ) : OpCode()
 
-    data class Jit(val m1: Mode, val m2: Mode) : OpCode()
+    data class Jit(
+        val m1: Mode,
+        val m2: Mode,
+    ) : OpCode()
 
-    data class Jif(val m1: Mode, val m2: Mode) : OpCode()
+    data class Jif(
+        val m1: Mode,
+        val m2: Mode,
+    ) : OpCode()
 
-    data class Lt(val m1: Mode, val m2: Mode, val m3: Mode) : OpCode()
+    data class Lt(
+        val m1: Mode,
+        val m2: Mode,
+        val m3: Mode,
+    ) : OpCode()
 
-    data class Eq(val m1: Mode, val m2: Mode, val m3: Mode) : OpCode()
+    data class Eq(
+        val m1: Mode,
+        val m2: Mode,
+        val m3: Mode,
+    ) : OpCode()
 
     object Exit : OpCode()
 }

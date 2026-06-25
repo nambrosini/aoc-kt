@@ -6,7 +6,7 @@ import util.permutations
 import util.readInput
 
 object Day07 {
-    fun part1(input: List<String>): Int {
+    fun part1(input: String): Int {
         val memory = parseMemory(input)
 
         var max = 0
@@ -22,7 +22,7 @@ object Day07 {
         return max
     }
 
-    fun part2(input: List<String>): Int {
+    fun part2(input: String): Int {
         val memory = parseMemory(input)
 
         var max = 0
