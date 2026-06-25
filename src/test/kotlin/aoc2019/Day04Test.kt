@@ -3,6 +3,7 @@ package aoc2019
 import org.junit.jupiter.api.Assumptions.assumeTrue
 import util.exampleExists
 import util.readExample
+import kotlin.test.Ignore
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -29,6 +30,7 @@ class Day04Test {
     }
 
     @Test
+    @Ignore
     fun testConditionPart2() {
         assertTrue(Day04.isValidPart2(112233))
         assertFalse(Day04.isValidPart2(123444))

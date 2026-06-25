@@ -6,16 +6,16 @@ import util.readExample
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class Day03Test {
+class Day06Test {
     @Test
     fun part1() {
-        assumeTrue(exampleExists(2019, 3, 1))
-        assertEquals(135, Day03.part1(readExample(2019, 3, 1)))
+        assumeTrue(exampleExists(2019, 6, 1))
+        assertEquals(42, Day06.part1(readExample(2019, 6, 1)))
     }
 
     @Test
     fun part2() {
-        assumeTrue(exampleExists(2019, 3, 2))
-        assertEquals(410, Day03.part2(readExample(2019, 3, 2)))
+        assumeTrue(exampleExists(2019, 6, 2))
+        assertEquals(4, Day06.part2(readExample(2019, 6, 2)))
     }
 }
