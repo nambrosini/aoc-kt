@@ -23,3 +23,12 @@ fun Map<Pos, Long>.print(): String {
 
     return builder.toString()
 }
+
+fun Int.cmp(other: Int): Int =
+    if (this > other) {
+        -1
+    } else if (this == other) {
+        0
+    } else {
+        1
+    }
