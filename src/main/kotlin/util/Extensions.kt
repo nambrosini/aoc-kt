@@ -2,7 +2,7 @@ package util
 
 import util.loc.Pos
 
-fun Map<Pos, Long>.print(): String {
+fun Map<Pos, Long>.print(characters: List<Char>): String {
     val minX = this.keys.minOf { it.x }
     val minY = this.keys.minOf { it.y }
     val maxX = this.keys.maxOf { it.x }
@@ -12,11 +12,7 @@ fun Map<Pos, Long>.print(): String {
 
     for (y in minY..maxY) {
         for (x in minX..maxX) {
-            if (this[Pos(x, y)] == 1L) {
-                builder.append("█")
-            } else {
-                builder.append(" ")
-            }
+            builder.append(characters[this[Pos(x, y)]!!.toInt()])
         }
         builder.append('\n')
     }

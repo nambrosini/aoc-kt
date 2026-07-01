@@ -47,7 +47,7 @@ object Day11 {
             currentPos += dir
         }
 
-        return map.print()
+        return map.print(listOf(' ', '█'))
     }
 }
 

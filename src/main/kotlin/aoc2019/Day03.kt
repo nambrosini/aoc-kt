@@ -5,7 +5,7 @@ import util.loc.toDir
 import util.readInput
 
 object Day03 {
-    fun part1(input: String): Int {
+    fun part1(input: String): Long {
         val wires = mutableListOf<MutableSet<Pos>>()
         for (instructions in input.lines()) {
             var pos = Pos(0, 0)

@@ -6,17 +6,19 @@ import kotlin.math.absoluteValue
 import kotlin.math.atan2
 
 data class Pos(
-    var x: Int,
-    var y: Int,
+    var x: Long,
+    var y: Long,
 ) {
-    fun dist(other: Pos): Int = (other.x - x).absoluteValue + (other.y - y).absoluteValue
+    constructor(x: Int, y: Int) : this(x.toLong(), y.toLong())
 
-    fun calcAngle(other: Pos): Int {
+    fun dist(other: Pos): Long = (other.x - x).absoluteValue + (other.y - y).absoluteValue
+
+    fun calcAngle(other: Pos): Long {
         val dx = other.x.toDouble() - this.x.toDouble()
         val dy = other.y.toDouble() - this.y.toDouble()
         var angle = atan2(dx, -dy)
         if (angle < 0) angle += 2 * PI
-        return (angle * 1000000).toInt()
+        return (angle * 1000000).toLong()
     }
 
     fun getStep(other: Pos): Pos {
@@ -33,5 +35,5 @@ data class Pos(
         return Pos(x + dir.x, y + dir.y)
     }
 
-    operator fun times(coeff: Double): Pos = Pos((x.toDouble() * coeff).toInt(), (y.toDouble() * coeff).toInt())
+    operator fun times(coeff: Double): Pos = Pos((x.toDouble() * coeff).toLong(), (y.toDouble() * coeff).toLong())
 }

@@ -81,7 +81,7 @@ data class Grid<T>(
             return null
         }
 
-        return this.grid[pos.y][pos.x]
+        return this.grid[pos.y.toInt()][pos.x.toInt()]
     }
 
     override fun toString(): String {

@@ -13,7 +13,7 @@ object Day10 {
         return base.second
     }
 
-    fun part2(input: String): Int {
+    fun part2(input: String): Long {
         val grid = input.toGrid()
         var found = grid.findAll('#')
         val base = bestBase(found).first
@@ -50,8 +50,8 @@ object Day10 {
 
     data class Asteroid(
         val pos: Pos,
-        val angle: Int,
-        val dist: Int,
+        val angle: Long,
+        val dist: Long,
     )
 
     fun Pos.toAsteroid(base: Pos): Asteroid = Asteroid(this, base.calcAngle(this), base.dist(this))
