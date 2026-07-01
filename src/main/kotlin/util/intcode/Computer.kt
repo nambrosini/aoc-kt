@@ -98,7 +98,10 @@ class Computer(
     fun getMem(
         offset: Int,
         mode: Mode,
-    ): Long = memory[getIndex(offset, mode)]
+    ): Long {
+        val index = getIndex(offset, mode)
+        return memory[index]
+    }
 
     fun getIndex(
         offset: Int,

@@ -4,7 +4,7 @@ import util.readInput
 
 object Day02 {
     fun part1(input: String): Int {
-        val pc = Computer(input.split(',').map { it.toInt() }.toMutableList())
+        val pc = Pc(input.split(',').map { it.toInt() }.toMutableList())
         pc.run(12, 2)
         return pc.memory[0]
     }
@@ -14,7 +14,7 @@ object Day02 {
 
         for (a in 0..100) {
             for (b in 0..100) {
-                val pc = Computer(memory.toMutableList())
+                val pc = Pc(memory.toMutableList())
                 pc.run(a, b)
 
                 if (pc.memory[0] == 19690720) {
@@ -27,7 +27,7 @@ object Day02 {
     }
 }
 
-class Computer(
+class Pc(
     val memory: MutableList<Int>,
 ) {
     var pointer: Int = 0

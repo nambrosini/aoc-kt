@@ -14,6 +14,23 @@ enum class Dir {
             D -> Pos(0, 1)
             L -> Pos(-1, 0)
         }
+
+    fun turn(right: Boolean): Dir =
+        if (right) {
+            when (this) {
+                U -> R
+                R -> D
+                D -> L
+                L -> U
+            }
+        } else {
+            when (this) {
+                U -> L
+                L -> D
+                D -> R
+                R -> U
+            }
+        }
 }
 
 fun Char.toDir(): Dir =
