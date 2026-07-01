@@ -1,6 +1,5 @@
 package aoc2019
 
-import util.intcode.parseMemory
 import util.readInput
 
 object Day02 {
